@@ -3,8 +3,8 @@
 TelegramNotify es un plugin para servidores PaperMC que permite enviar notificaciones a un chat de Telegram cuando ocurren ciertos eventos en el servidor de Minecraft.
 
 ## Requisitos
-- **Servidor PaperMC** versión 1.20.4 o superior.
-- **Java 17** o superior.
+- **Servidor PaperMC** versión 1.21.1 superior.
+- **Java 21** o superior.
 - Un **bot de Telegram** y el ID del chat donde se enviarán las notificaciones.
 
 ## Instalación
