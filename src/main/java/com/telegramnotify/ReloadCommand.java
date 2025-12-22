@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 
 public class ReloadCommand implements CommandExecutor {
 
-    private Main plugin;
+    private final Main plugin;
 
     public ReloadCommand(Main plugin) {
         this.plugin = plugin;

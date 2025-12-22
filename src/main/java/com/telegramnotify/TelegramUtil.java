@@ -1,23 +1,36 @@
 package com.telegramnotify;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 
-public class TelegramUtil {
+public final class TelegramUtil {
+
+    private static final HttpClient CLIENT = HttpClient.newBuilder()
+            .connectTimeout(Duration.ofSeconds(5))
+            .build();
+
+    private TelegramUtil() {
+    }
 
     public static void sendMessage(String token, String chatId, String message) {
         try {
-            String urlStr = "https://api.telegram.org/bot" + token +
-                    "/sendMessage?chat_id=" + chatId +
-                    "&parse_mode=Markdown&text=" +
-                    URLEncoder.encode(message, "UTF-8");
+            String body = "chat_id=" + URLEncoder.encode(chatId, StandardCharsets.UTF_8)
+                    + "&parse_mode=Markdown"
+                    + "&text=" + URLEncoder.encode(message, StandardCharsets.UTF_8);
 
-            URL url = new URL(urlStr);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
-            con.setConnectTimeout(5000);
-            con.getInputStream().close();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://api.telegram.org/bot" + token + "/sendMessage"))
+                    .timeout(Duration.ofSeconds(10))
+                    .header("Content-Type", "application/x-www-form-urlencoded")
+                    .POST(HttpRequest.BodyPublishers.ofString(body))
+                    .build();
+
+            CLIENT.send(request, HttpResponse.BodyHandlers.discarding());
         } catch (Exception e) {
             e.printStackTrace();
         }
