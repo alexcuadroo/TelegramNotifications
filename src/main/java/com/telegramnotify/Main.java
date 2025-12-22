@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.server.ServerLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
@@ -57,6 +58,14 @@ public class Main extends JavaPlugin implements Listener {
         
         String template = getConfig().getString("messages.death", "💀 *{player}* murió");
         String msg = template.replace("{player}", e.getPlayer().getName());
+        sendAsync(msg);
+    }
+
+    @EventHandler
+    public void onServerLoad(ServerLoadEvent e) {
+        if (!getConfig().getBoolean("notifications.server_start", true)) return;
+        
+        String msg = getConfig().getString("messages.server_start", "🚀 Servidor iniciado");
         sendAsync(msg);
     }
 
