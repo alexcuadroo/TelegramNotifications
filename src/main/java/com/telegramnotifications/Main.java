@@ -28,7 +28,10 @@ public class Main extends JavaPlugin implements Listener {
         loadConfigValues();
 
         if (!configSnapshot.isValid()) {
+            getLogger().severe("==============================================");
             getLogger().severe("Token o Chat ID no configurados");
+            getLogger().severe("Por favor, configura el archivo config.yml");
+            getLogger().severe("==============================================");
             return;
         }
 
@@ -148,7 +151,8 @@ public class Main extends JavaPlugin implements Listener {
         ConfigSnapshot cfg = configSnapshot;
         if (!cfg.isValid()) return;
 
-        for (int i = 0; i < 5; i++) { // pequeño throttle por tick
+        // Procesar hasta 10 mensajes por tick para no bloquear
+        for (int i = 0; i < 10; i++) {
             String msg = sendQueue.poll();
             if (msg == null) break;
             TelegramUtil.sendMessage(cfg.token(), cfg.chatId(), msg);

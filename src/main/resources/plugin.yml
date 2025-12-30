@@ -1,5 +1,5 @@
 name: TelegramNotifications
-version: 2.3.0
+version: 2.3.2
 main: com.telegramnotifications.Main
 api-version: 1.21
 
