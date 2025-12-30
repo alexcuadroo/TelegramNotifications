@@ -1,4 +1,4 @@
-package com.telegramnotify;
+package com.telegramnotifications;
 
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
@@ -41,7 +41,7 @@ public class Main extends JavaPlugin implements Listener {
         }
 
         startWorker();
-        getLogger().info("TelegramNotify activado");
+        getLogger().info("TelegramNotifications activado");
     }
 
     @Override

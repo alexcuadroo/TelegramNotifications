@@ -1,4 +1,4 @@
-package com.telegramnotify;
+package com.telegramnotifications;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,14 +14,14 @@ public class ReloadCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!sender.hasPermission("telegramnotify.reload")) {
+        if (!sender.hasPermission("telegramnotifications.reload")) {
             sender.sendMessage("§cNo tienes permiso para usar este comando.");
             return true;
         }
 
         plugin.reloadConfig();
         plugin.loadConfigValues();
-        sender.sendMessage("§a✓ Configuración de TelegramNotify recargada.");
+        sender.sendMessage("§a✓ Configuración de TelegramNotifications recargada.");
         return true;
     }
 }

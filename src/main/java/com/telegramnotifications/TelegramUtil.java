@@ -1,4 +1,4 @@
-package com.telegramnotify;
+package com.telegramnotifications;
 
 import java.net.URI;
 import java.net.URLEncoder;
